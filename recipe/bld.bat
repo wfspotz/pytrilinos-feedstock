@@ -4,12 +4,9 @@ cd build
 cmake ^
   -G "%CMAKE_GENERATOR%" ^
   -D CMAKE_BUILD_TYPE:STRING=RELEASE ^
-  -D CMAKE_INSTALL_PREFIX:PATH=%PREFIX% ^
+  -D CMAKE_INSTALL_PREFIX:PATH=%LIBRARY_PREFIX% ^
   -D BUILD_SHARED_LIBS:BOOL=ON ^
-  -D TPL_ENABLE_MPI:BOOL=ON ^
-  -D MPI_BASE_DIR:PATH=%PREFIX% ^
-  -D MPI_EXEC:FILEPATH=%PREFIX%/bin/mpiexec ^
-  -D MPI_EXEC_PRE_NUMPROCS_FLAGS:STRING="--allow-run-as-root" ^
+  -D TPL_ENABLE_MPI:BOOL=OFF ^
   -D PYTHON_EXECUTABLE:FILEPATH=%PYTHON% ^
   -D SWIG_EXECUTABLE:FILEPATH=%PREFIX%/bin/swig ^
   -D DOXYGEN_EXECUTABLE:FILEPATH=%PREFIX%/bin/doxygen ^
@@ -41,7 +38,5 @@ cmake ^
   %SRC_DIR%
 
 cmake --build . --config RELEASE
-
 ctest --output-on-failure
-
 cmake --build . --config RELEASE --target install
